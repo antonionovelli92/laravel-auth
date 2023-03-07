@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Guest\HomeController as GuestHomeController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [GuestHomeController::class, 'index']);
 
-Route::get('/admin', [AdminHomeController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.home');
+
+// Rotte protette
+Route::middleware(['auth', 'verified'])->name('admin.')->prefix('/admin')->group(function () {
+
+    //DASHBORD DELL'UTENTE LOGGATO;  svoto alcuni campi perche già messi sopra(come il nome e il prefisso) 
+    Route::get('/', [AdminHomeController::class, 'index'])->name('home');
+
+    // Rotte dei miei project
+    Route::resource('projects', ProjectController::class);
+});
+
+
+
+
+
+
 
 Route::middleware('auth')->name('profile.')->prefix('/profile')->group(function () {
     Route::get('/', [ProfileController::class, 'edit'])->name('edit');
