@@ -19,8 +19,8 @@ return new class extends Migration
             $table->text('content')->nullable();
             $table->string('slag', 80)->unique();
             $table->string('image')->nullable();
-            $table->string('url_project', 80)->nullable();
-            $table->string('url_generic', 80)->nullable();
+            $table->string('url_project', 1000)->nullable();
+            $table->string('url_generic', 1000)->nullable();
             $table->timestamps();
         });
     }
