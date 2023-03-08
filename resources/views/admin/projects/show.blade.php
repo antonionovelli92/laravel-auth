@@ -33,7 +33,12 @@
                 <div class="project-content">
                     {!! $project->content !!}
                 </div>
-                <h3>Autore: {{ $project->author }}</h3>
+                <h6><strong>Autore:</strong> {{ $project->author }}</h6>
+                <div class="d-flex justify-content-between">
+                    <h6> <strong>Creato:</strong> {{ $project->created_at }}</h6>
+                    <h6> <strong>Aggiornato:</strong> {{ $project->updated_at }}</h6>
+
+                </div>
 
             </div>
         </div>
