@@ -21,7 +21,7 @@
                   @auth
                       <li class="nav-item">
                           <a class="nav-link @if (Route::is('admin.home')) active @endif"
-                              href="{{ url('/') }}">{{ __('Home') }}</a>
+                              href="{{ route('admin.home') }}">{{ __('Home') }}</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link @if (Route::is('admin.projects.index')) active @endif"
