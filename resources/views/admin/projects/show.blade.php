@@ -4,7 +4,7 @@
 
 @section('content')
     <header>
-        <h1 class="my-5">
+        <h1 class="my-5 text-white">
             {{ $project->title }}
         </h1>
         <div class="projects">
@@ -26,7 +26,7 @@
 
         </div>
 
-        <div class="project-show" id="project-1">
+        <div class="project-show text-bg-dark rounded-5" id="project-1">
             <div class="project-details">
                 <h2>{{ $project->title }}</h2>
                 <p>{{ $project->description }}</p>
