@@ -24,7 +24,7 @@
                               href="{{ route('admin.home') }}">{{ __('Home') }}</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link @if (Route::is('admin.projects.index')) active @endif"
+                          <a class="nav-link @if (request()->routeIs('admin.projects*')) active @endif"
                               href="{{ route('admin.projects.index') }}">{{ __('Projects') }}</a>
                       </li>
                   @endauth
