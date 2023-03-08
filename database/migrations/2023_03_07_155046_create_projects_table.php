@@ -17,13 +17,16 @@ return new class extends Migration
             $table->string('author', 30);
             $table->text('description')->nullable();
             $table->text('content')->nullable();
-            $table->string('slag', 80)->unique();
+            $table->string('slug', 80)->unique();
             $table->string('image')->nullable();
             $table->string('url_project', 1000)->nullable();
             $table->string('url_generic', 1000)->nullable();
             $table->timestamps();
         });
     }
+
+    // TODO modificare la parola slag
+
 
     /**
      * Reverse the migrations.

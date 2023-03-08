@@ -13,7 +13,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Author</th>
                 <th scope="col">Description</th>
-                <th scope="col">Slag</th>
+                <th scope="col">Slug</th>
                 <th scope="col">Link</th>
                 <th scope="col">Creato il</th>
                 <th scope="col">Aggiornato il</th>
@@ -28,7 +28,7 @@
                     <td>{{ $project->title }}</td>
                     <td>{{ $project->author }}</td>
                     <td>{{ $project->description }}</td>
-                    <td>{{ $project->slag }}</td>
+                    <td>{{ $project->slug }}</td>
                     <td>{{ $project->url_project }}</td>
                     <td>{{ $project->created_at }}</td>
                     <td>{{ $project->updated_at }}</td>
