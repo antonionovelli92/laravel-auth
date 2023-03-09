@@ -3,8 +3,9 @@
 @section('title', 'Projects')
 
 @section('content')
-    <header>
+    <header class="d-flex justify-content-between align-items-center">
         <h1 class="my-5 text-white">Projects:</h1>
+        <a href="{{ route('admin.projects.create') }}" class="btn btn-success"><i class="fa-solid fa-plus"></i></a>
     </header>
 
 
