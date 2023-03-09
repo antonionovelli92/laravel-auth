@@ -19,7 +19,7 @@
                 <a href="{{ $project->url_generic }}" class="btn btn-small btn-secondary p-0">Visualizza il link generico</a>
                 <div class="d-flex justify-content-start mt-5">
                     <a class="btn btn-small rounded-5" href="{{ route('admin.projects.index') }}">
-                        <i class="fa-solid fa-arrow-left"></i>
+                        <i class="fa-solid fa-arrow-left text-white"></i>
                     </a>
                 </div>
             </div>
