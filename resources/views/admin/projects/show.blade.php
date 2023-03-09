@@ -17,10 +17,18 @@
                 </a>
                 <a href="{{ $project->url_project }}" class="btn btn-small btn-primary p-0 mb-2">Visualizza il progetto</a>
                 <a href="{{ $project->url_generic }}" class="btn btn-small btn-secondary p-0">Visualizza il link generico</a>
+                {{-- Bottoni --}}
                 <div class="d-flex justify-content-start mt-5">
-                    <a class="btn btn-small rounded-5" href="{{ route('admin.projects.index') }}">
+                    <a class="btn btn-primary rounded-5" href="{{ route('admin.projects.index') }}">
                         <i class="fa-solid fa-arrow-left text-white"></i>
                     </a>
+                    <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-danger rounded-5 ms-2">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
 
