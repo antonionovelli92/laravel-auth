@@ -38,7 +38,8 @@
                         <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-small btn-primary">
                             <i class="fa-solid fa-eye"></i>
                         </a>
-                        <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST">
+                        <form action="{{ route('admin.projects.destroy', $project->id) }}" class="delete-form"
+                            method="POST" data-entity="progetto">
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="btn btn-danger  ms-2">
@@ -53,6 +54,9 @@
 
         </tbody>
     </table>
+
+@endsection
+@section('scripts')
 
 
 

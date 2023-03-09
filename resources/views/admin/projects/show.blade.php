@@ -22,7 +22,8 @@
                     <a class="btn btn-primary rounded-5" href="{{ route('admin.projects.index') }}">
                         <i class="fa-solid fa-arrow-left text-white"></i>
                     </a>
-                    <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST">
+                    <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" class="delete-form"
+                        data-entity="progetto">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="btn btn-danger rounded-5 ms-2">
