@@ -19,9 +19,15 @@
                 <a href="{{ $project->url_generic }}" class="btn btn-small btn-secondary p-0">Visualizza il link generico</a>
                 {{-- Bottoni --}}
                 <div class="d-flex justify-content-start mt-5">
-                    <a class="btn btn-primary rounded-5" href="{{ route('admin.projects.index') }}">
+                    {{-- ? Btn-torna-indietro --}}
+                    <a class="btn btn-success rounded-5" href="{{ route('admin.projects.index') }}">
                         <i class="fa-solid fa-arrow-left text-white"></i>
                     </a>
+                    {{-- ? Btn-modifica --}}
+                    <a class="btn btn-warning rounded-5 ms-2" href="{{ route('admin.projects.edit', $project->id) }}">
+                        <i class="fa-solid fa-edit text-white"></i>
+                    </a>
+                    {{-- ? Btn-elimina --}}
                     <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" class="delete-form"
                         data-entity="progetto">
                         @method('DELETE')

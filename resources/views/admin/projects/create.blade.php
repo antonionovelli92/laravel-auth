@@ -8,8 +8,6 @@
     </header>
 
     {{-- FORM --}}
-
-
     <form action="{{ route('admin.projects.store') }}" method="POST" class="text-white">
         @csrf
         <div class="row">

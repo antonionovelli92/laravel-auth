@@ -35,18 +35,27 @@
                     <td>{{ $project->url_project }}</td>
                     <td>{{ $project->created_at }}</td>
                     <td>{{ $project->updated_at }}</td>
-                    <td class="btn-td d-flex justify-content-end align-items-center ">
-                        <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-small btn-primary">
-                            <i class="fa-solid fa-eye"></i>
-                        </a>
-                        <form action="{{ route('admin.projects.destroy', $project->id) }}" class="delete-form"
-                            method="POST" data-entity="progetto">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-danger  ms-2">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </form>
+                    {{-- Bottoni --}}
+                    <td>
+                        <div class="d-flex justify-content-end align-items-center">
+                            {{-- ? Btn-dettaglio --}}
+                            <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-small btn-primary">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                            {{-- ? Btn-modifica --}}
+                            <a class="btn btn-warning ms-2" href="{{ route('admin.projects.edit', $project->id) }}">
+                                <i class="fa-solid fa-edit text-white"></i>
+                            </a>
+                            {{-- ? Btn-elmina --}}
+                            <form action="{{ route('admin.projects.destroy', $project->id) }}" class="delete-form"
+                                method="POST" data-entity="progetto">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-danger  ms-2">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @empty
