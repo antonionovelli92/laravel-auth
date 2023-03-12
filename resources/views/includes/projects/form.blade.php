@@ -1,8 +1,9 @@
 @if ($project->exists)
-    <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" class="text-white">
+    <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" class="text-white"
+        enctype="multipart/form-data">
         @method('PUT')
     @else
-        <form action="{{ route('admin.projects.store') }}" method="POST" class="text-white">
+        <form action="{{ route('admin.projects.store') }}" method="POST" class="text-white" enctype="multipart/form-data">
 @endif
 @csrf
 <div class="row">
@@ -38,7 +39,7 @@
             <input type="text" name="author" id="author"
                 class="form-control @error('author') is-invalid @enderror" value="{{ old('author', $project->author) }}"
                 required minlength="3" maxlength="80">
-            @error('title')
+            @error('author')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
@@ -54,7 +55,7 @@
             <input type="text" name="description" id="description"
                 class="form-control @error('description') is-invalid @enderror"
                 value="{{ old('description', $project->description) }}">
-            @error('title')
+            @error('description')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
@@ -66,12 +67,12 @@
         </div>
     </div>
     {{-- Immagine --}}
-    <div class="col-md-8">
+    <div class="col-md-6">
         <div class="mb-3">
             <label for="image" class="form-label">Immagine</label>
-            <input type="url" name="image" id="image"
+            <input type="file" name="image" id="image"
                 class="form-control @error('image') is-invalid @enderror" value="{{ old('image', $project->image) }}">
-            @error('title')
+            @error('image')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
@@ -85,7 +86,7 @@
         <div class="mb-3">
             <label for="content" class="form-label">Contenuto</label>
             <textarea name="content" id="content" class="form-control @error('content') is-invalid @enderror" rows="10">{{ old('content', $project->content) }}</textarea>
-            @error('title')
+            @error('content')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
@@ -102,7 +103,7 @@
                 <input type="url" name="url_project" id="url_project"
                     class="form-control @error('url_project') is-invalid @enderror"
                     value="{{ old('url_project', $project->url_project) }}">
-                @error('title')
+                @error('url_project')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -119,7 +120,7 @@
                 <input type="url" name="url_generic" id="url_generic"
                     class="form-control @error('url_generic') is-invalid @enderror"
                     value="{{ old('url_generic', $project->url_generic) }}">
-                @error('title')
+                @error('url_generic')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>

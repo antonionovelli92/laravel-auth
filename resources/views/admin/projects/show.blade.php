@@ -11,12 +11,14 @@
             <div class="project">
                 <a href="#project-1">
                     @if ($project->image)
-                        <img src="{{ $project->image }}" alt="{{ $project->title }}">
+                        <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}">
                     @endif
                     <h2>{{ $project->title }}</h2>
                 </a>
                 <a href="{{ $project->url_project }}" class="btn btn-small btn-primary p-0 mb-2">Visualizza il progetto</a>
                 <a href="{{ $project->url_generic }}" class="btn btn-small btn-secondary p-0">Visualizza il link generico</a>
+
+
                 {{-- Bottoni --}}
                 <div class="d-flex justify-content-start mt-5">
                     {{-- ? Btn-torna-indietro --}}
