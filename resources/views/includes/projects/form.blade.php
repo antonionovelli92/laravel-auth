@@ -67,7 +67,7 @@
         </div>
     </div>
     {{-- Immagine --}}
-    <div class="col-md-6">
+    <div class="col-md-7">
         <div class="mb-3">
             <label for="image" class="form-label">Immagine</label>
             <input type="file" name="image" id="image"
@@ -80,6 +80,12 @@
                 <div class="text-muted">Inserisci l'immagine</div>
             @enderror
         </div>
+    </div>
+    {{-- Anteprima immagine --}}
+    <div class="col-md-1">
+        <img class="img-fluid" id="img-preview"
+            src="{{ $project->image ? asset('storage/' . $project->image) : 'https://marcolanci.it/utils/placeholder.jpg' }}"
+            alt="">
     </div>
     {{-- Contenuto --}}
     <div class="col-md-12">
@@ -146,6 +152,7 @@
 </form>
 
 @section('scripts')
+    {{-- ! Script per la gestione dello slug --}}
     <script>
         //Prendo gli elementi dal dom
         const slugInput = document.getElementById('slug');
@@ -155,6 +162,35 @@
 
         titleInput.addEventListener('blur', () => {
             slugInput.value = titleInput.value.toLowerCase().split(' ').join('-');
+        })
+    </script>
+
+
+
+
+
+    {{-- ! Script per la gestione dell'anteprima immagine --}}
+    <script>
+        // Creo una constante d'appoggio
+        const placeholder = 'https://marcolanci.it/utils/placeholder.jpg';
+
+        // Prendo gli elementi dal dom
+        const imageInput = document.getElementById('image');
+        const imagePreview = document.getElementById('img-preview');
+
+        // Ascolto il cambio del caricamento file
+        imageInput.addEventListener('change', () => {
+            // Controllo se ho caricato un file
+            if (imageInput.files && imageInput.files[0]) {
+                const reader = new FileReader();
+                reader.readAsDataURL(imageInput.files[0])
+
+                // Quando sei pronto (ossia quando ha preparato il dato, promemoria: onload è un 'addeventlistener')
+                reader.onload = e => {
+                    imagePreview.src = e.target.result;
+                }
+
+            } else imagePreview.src = placeholder;
         })
     </script>
 @endsection

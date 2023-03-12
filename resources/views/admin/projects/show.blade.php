@@ -11,7 +11,7 @@
             <div class="project">
                 <a href="#project-1">
                     @if ($project->image)
-                        <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}">
+                        <img class="img-fluid" src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}">
                     @endif
                     <h2>{{ $project->title }}</h2>
                 </a>

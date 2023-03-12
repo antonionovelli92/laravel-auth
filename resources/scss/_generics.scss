@@ -3,3 +3,13 @@ body{
    background-size: cover;
 background-repeat: no-repeat;
 }
+
+
+// effetto hover per l'iimmagine in anteprima
+#img-preview{
+    &:hover{
+      transform: scale(4.1);
+      cursor: pointer;
+      box-shadow: 0 0 10px red;
+    }
+}

@@ -145,6 +145,15 @@ class ProjectController extends Controller
 
         $data = $request->all();
         $data['slug'] = Str::slug($data['title'], '-');
+
+        // Per l'immagine (in modo da non avere doppioni nella cartella storage, una elimina l'altra precedente )
+        if (Arr::exists($data, 'image')) {
+            if ($project->image) Storage::delete($project->image);
+            $img_url = Storage::put('projects', $data['image']);
+            $data['image'] = $img_url;
+        };
+
+
         $project->update($data);
         return to_route('admin.projects.show', $project->id)->with('type', 'success')->with('msg', 'Questo fantastico progetto è stato modificato con successo!');
     }
@@ -154,6 +163,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        // eliminare l'immagine se no rimane in memoria
+        if ($project->image) Storage::delete($project->image);
+
         $project->delete();
         return to_route('admin.projects.index')->with('type', 'danger')->with('msg', "il progetto '$project->title' è stato eliminato con successo");
     }
