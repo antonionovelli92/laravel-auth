@@ -32,11 +32,11 @@
 
 
         <main class="container">
-            @include('includes.alert')
+            @include('includes.alerts.session')
 
             {{-- Solo utenti loggati --}}
             @auth
-                @include('includes.errors-alert')
+                @include('includes.alerts.errors')
             @endauth
             @yield('content')
         </main>
