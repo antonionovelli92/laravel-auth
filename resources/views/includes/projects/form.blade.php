@@ -1,8 +1,8 @@
 @if ($project->exists)
-    <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" class="text-white" novalidate>
+    <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" class="text-white">
         @method('PUT')
     @else
-        <form action="{{ route('admin.projects.store') }}" method="POST" class="text-white" novalidate>
+        <form action="{{ route('admin.projects.store') }}" method="POST" class="text-white">
 @endif
 @csrf
 <div class="row">
@@ -12,7 +12,7 @@
             <label for="title" class="form-label">Titolo</label>
             <input type="text" name="title" id="title"
                 class="form-control @error('title') is-invalid @enderror" value="{{ old('title', $project->title) }}"
-                required minlength="3" maxlength="80">
+                minlength="3" maxlength="80">
             @error('title')
                 <div class="invalid-feedback">
                     {{ $message }}

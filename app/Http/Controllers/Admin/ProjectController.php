@@ -35,6 +35,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         // Validazione
+        // todo possibile problema validazione con il titolo
         $request->validate([
             'title' => 'required|string|unique:projects|min:3|max:80',
             'author' => 'required|string|min:3|max:30',
