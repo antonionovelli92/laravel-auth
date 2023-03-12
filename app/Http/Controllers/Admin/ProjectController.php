@@ -6,7 +6,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
-
+use Illuminate\Validation\Rule;
 
 class ProjectController extends Controller
 {
@@ -34,6 +34,37 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        // Validazione
+        $request->validate([
+            'title' => 'required|string|unique:projects|min:3|max:80',
+            'author' => 'required|string|min:3|max:30',
+            'description' => 'required|string|min:3',
+            'content' => 'required|string|min:3',
+            'slug' => 'required|string|unique:projects|min:3|max:80',
+            'image' => 'nullable|url',
+            'url_project' => 'nullable|url',
+            'url_generic' => 'nullable|url',
+        ], [
+            'title.required' => 'Il titolo è obbligatorio',
+            'title.unique' => "Esiste già un progetto chiamato $request->title",
+            'title.min' => 'il titolo deve avere almeno 3 caratteri',
+            'title.max' => 'il titolo deve avere un massimo di 80 caratteri',
+            'author.required' => 'Il nome dell\'autore è obbligatorio, anche se sei solo tu!',
+            'author.min' => 'il nome dell\'autore deve avere almeno 3 caratteri',
+            'author.max' => 'il nome dell\'autore deve avere massimo 30 caratteri',
+            'description.required' => 'Il progetto deve avere una descrizone',
+            'description.min' => 'Il progetto deve avere almeno 3 caratteri',
+            'content.required' => 'Il progetto deve avere una descrizone',
+            'content.min' => 'Il progetto deve avere almeno 3 caratteri',
+            'slug.required' => 'Il titolo è obbligatorio',
+            'slug.unique' => "Esiste già un progetto chiamato $request->slug",
+            'slug.min' => 'il titolo deve avere almeno 3 caratteri',
+            'slug.max' => 'il titolo deve avere un massimo di 80 caratteri',
+            'image.url' => 'l\'immagine deve avere un link valido',
+            'url_project.url' => 'il link del progetto deve essere valido',
+            'url_generic.url' => 'il link generico deve essere valido',
+
+        ]);
 
         $data = $request->all();
         $project = new Project();
@@ -68,6 +99,38 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+        // Validazione
+        $request->validate([
+            'title' => ['required', 'string', Rule::unique('projects')->ignore($project->id), 'min:3', 'max:80'],
+            'author' => 'required|string|min:3|max:30',
+            'description' => 'required|string|min:3',
+            'content' => 'required|string|min:3',
+            'slug' => ['required', 'string', Rule::unique('projects')->ignore($project->id), 'min:3', 'max:80'],
+            'image' => 'nullable|url',
+            'url_project' => 'nullable|url',
+            'url_generic' => 'nullable|url',
+        ], [
+            'title.required' => 'Il titolo è obbligatorio',
+            'title.unique' => "Esiste già un progetto chiamato $request->title",
+            'title.min' => 'il titolo deve avere almeno 3 caratteri',
+            'title.max' => 'il titolo deve avere un massimo di 80 caratteri',
+            'author.required' => 'Il nome dell\'autore è obbligatorio, anche se sei solo tu!',
+            'author.min' => 'il nome dell\'autore deve avere almeno 3 caratteri',
+            'author.max' => 'il nome dell\'autore deve avere massimo 30 caratteri',
+            'description.required' => 'Il progetto deve avere una descrizone',
+            'description.min' => 'Il progetto deve avere almeno 3 caratteri',
+            'content.required' => 'Il progetto deve avere una descrizone',
+            'content.min' => 'Il progetto deve avere almeno 3 caratteri',
+            'slug.required' => 'Il titolo è obbligatorio',
+            'slug.unique' => "Esiste già un progetto chiamato $request->slug",
+            'slug.min' => 'il titolo deve avere almeno 3 caratteri',
+            'slug.max' => 'il titolo deve avere un massimo di 80 caratteri',
+            'image.url' => 'l\'immagine deve avere un link valido',
+            'url_project.url' => 'il link del progetto deve essere valido',
+            'url_generic.url' => 'il link generico deve essere valido',
+
+        ]);
+
         $data = $request->all();
         $data['slug'] = Str::slug($data['title'], '-');
         $project->update($data);

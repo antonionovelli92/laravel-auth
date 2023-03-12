@@ -33,6 +33,11 @@
 
         <main class="container">
             @include('includes.alert')
+
+            {{-- Solo utenti loggati --}}
+            @auth
+                @include('includes.errors-alert')
+            @endauth
             @yield('content')
         </main>
     </div>
