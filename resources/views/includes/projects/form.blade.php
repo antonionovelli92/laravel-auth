@@ -136,6 +136,18 @@
             </div>
         </div>
     </div>
+    {{-- STATO --}}
+    <div class="row ">
+        <div class="col-md-12 my-5 d-flex justify-content-end ">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="is_published"
+                    name="is_published" @if (old('is_published', $project->is_published)) checked @endif>
+                <label class="form-check-label" for="is_published">Pubblicato</label>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 
 

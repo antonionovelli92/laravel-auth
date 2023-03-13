@@ -38,7 +38,15 @@
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </form>
+
                 </div>
+                <form action="{{ route('admin.projects.toggle', $project->id) }}" method="POST">
+                    @method('PATCH')
+                    @csrf
+                    <button type="submit" class="mt-3 btn btn-{{ $project->is_published ? 'danger' : 'success' }}">
+                        {{ $project->is_published ? 'Metti in bozza' : 'Pubblica' }}
+                    </button>
+                </form>
             </div>
 
         </div>
@@ -52,8 +60,10 @@
                 </div>
                 <h6><strong>Autore:</strong> {{ $project->author }}</h6>
                 <div class="d-flex justify-content-between">
-                    <h6> <strong>Creato:</strong> {{ $project->created_at }}</h6>
-                    <h6> <strong>Aggiornato:</strong> {{ $project->updated_at }}</h6>
+                    <strong>Creato:</strong> <time>{{ $project->created_at }}</time>
+                    <strong>Aggiornato:</strong> <time> {{ $project->updated_at }}</time>
+                    <strong>Stato:</strong> {{ $project->is_published ? 'Pubblicato' : 'Bozza' }}
+
 
                 </div>
 

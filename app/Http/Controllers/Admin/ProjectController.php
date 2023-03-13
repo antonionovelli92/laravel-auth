@@ -15,9 +15,21 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::orderBy('updated_at', 'DESC')->get();
+
+
+        // Per il filtro (aggiungo anche la request nell'index())
+        $filter = $request->query('filter');
+        $query = Project::orderby('updated_at', 'DESC');
+        if ($filter) {
+            $value = $filter === 'drafts' ? 0 : 1;
+            $query->where('is_published', $value);
+        }
+        $projects = $query->simplePaginate(5);
+
+        // se importo simplapaginatore devo aggiungerlo anche nel 'routeserviceprovider, nel caso non lo volessi rimarra il 'get'
+        // $projects = Project::orderBy('updated_at', 'DESC')->simplePaginate(5);
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -85,6 +97,8 @@ class ProjectController extends Controller
         $project->fill($data);
         $project->slug = Str::slug($project->title, '-');
 
+
+        $project->is_published = Arr::exists($data, 'is_published');
         $project->save();
 
         return to_route('admin.projects.show', $project->id)->with('type', 'success')->with('msg', 'Nuovo incredibile progetto inserito con successo!');
@@ -153,7 +167,7 @@ class ProjectController extends Controller
             $data['image'] = $img_url;
         };
 
-
+        $data['is_published'] = Arr::exists($data, 'is_published');
         $project->update($data);
         return to_route('admin.projects.show', $project->id)->with('type', 'success')->with('msg', 'Questo fantastico progetto è stato modificato con successo!');
     }
@@ -168,5 +182,19 @@ class ProjectController extends Controller
 
         $project->delete();
         return to_route('admin.projects.index')->with('type', 'danger')->with('msg', "il progetto '$project->title' è stato eliminato con successo");
+    }
+    // creo una funzione per il toggle
+    public function toggle(Project $project)
+    {
+        $project->is_published = !$project->is_published;
+        $action = $project->is_published ? 'pubblicato con successo' : 'salvato come bozza';
+        $type = $project->is_published ? 'success' : 'info';
+        $project->save();
+
+
+        // return to_route('admin.projects.index')->with('type', $type)->with('msg', "il progetto è stato $action");
+
+        // nel caso in cui volessi indirizzarlo in un'altra rotta
+        return redirect()->back()->with('type', $type)->with('msg', "il progetto è stato $action");
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Web RoutesP
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -28,6 +28,9 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('/admin')->group
 
     // Rotte dei miei project
     Route::resource('projects', ProjectController::class);
+
+    // ! Rotta per i toggle
+    Route::patch('/projects/{project}/toggle', [ProjectController::class, 'toggle'])->name('projects.toggle');
 });
 
 
